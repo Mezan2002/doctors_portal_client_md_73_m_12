@@ -2,15 +2,12 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-const Login = () => {
+const SignUp = () => {
   const {
     register,
-    formState: { errors },
     handleSubmit,
+    formState: { errors },
   } = useForm();
-  const handleLogIn = (data) => {
-    console.log(data);
-  };
   return (
     <div className="h-[800px] flex justify-center items-center">
       <div className="card w-[400px] shadow-xl">
@@ -18,7 +15,7 @@ const Login = () => {
           <h2 className="text-2xl text-center">Log In</h2>
           <div className="">
             <div>
-              <form className="mt-9" onSubmit={handleSubmit(handleLogIn)}>
+              <form className="mt-9">
                 <div className="form-control w-full">
                   <label className="label">
                     <span className="label-text">Email</span>
@@ -62,8 +59,8 @@ const Login = () => {
                   value="Log In"
                 />
                 <p className="text-center mt-2">
-                  New to Doctors Portal?{" "}
-                  <Link className="text-secondary">Create an Account</Link>{" "}
+                  Already Have an Account?
+                  <Link className="text-secondary">Please Log In</Link>{" "}
                 </p>
                 <div className="divider">OR</div>
                 <button className="btn btn-outline btn-accent btn-block">
@@ -78,4 +75,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default SignUp;
