@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const Login = () => {
+  const { loginUser, googleLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -14,7 +15,14 @@ const Login = () => {
     handleSubmit,
   } = useForm();
 
-  const { loginUser } = useContext(AuthContext);
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => setLogInError(error.message));
+  };
 
   const handleLogIn = (data) => {
     console.log(data);
@@ -90,10 +98,13 @@ const Login = () => {
                   </Link>{" "}
                 </p>
                 <div className="divider">OR</div>
-                <button className="btn btn-outline btn-accent btn-block">
-                  Continue With Google
-                </button>
               </form>
+              <button
+                onClick={handleGoogleLogin}
+                className="btn btn-outline btn-accent btn-block"
+              >
+                Continue With Google
+              </button>
             </div>
           </div>
         </div>
