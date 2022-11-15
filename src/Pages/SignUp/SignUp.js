@@ -5,13 +5,22 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Contexts/AuthProvider/AuthProvider";
 
 const SignUp = () => {
-  const { createUser, updateUser } = useContext(AuthContext);
+  const { createUser, updateUser, googleLogin } = useContext(AuthContext);
   const [signUpError, setSignUpError] = useState("");
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const handleGoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => setSignUpError(error.message));
+  };
 
   const handleSignUp = (data) => {
     console.log(data);
@@ -110,10 +119,13 @@ const SignUp = () => {
                   </Link>
                 </p>
                 <div className="divider">OR</div>
-                <button className="btn btn-outline btn-accent btn-block">
-                  Continue With Google
-                </button>
               </form>
+              <button
+                onClick={handleGoogleLogin}
+                className="btn btn-outline btn-accent btn-block"
+              >
+                Continue With Google
+              </button>
             </div>
           </div>
         </div>

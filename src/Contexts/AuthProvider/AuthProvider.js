@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -17,6 +18,12 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
+
+  //   login by google start
+  const googleLogin = () => {
+    return signInWithPopup(auth, googleProvider);
+  };
+  //   login by google end
 
   //   create user start
   const createUser = (email, password) => {
@@ -57,7 +64,15 @@ const AuthProvider = ({ children }) => {
   }, []);
   //   set observer end
 
-  const authInfo = { user, loading, createUser, loginUser, updateUser, logOut };
+  const authInfo = {
+    user,
+    loading,
+    googleLogin,
+    createUser,
+    loginUser,
+    updateUser,
+    logOut,
+  };
   return (
     <div>
       <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
