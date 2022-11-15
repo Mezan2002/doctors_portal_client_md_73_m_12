@@ -41,10 +41,10 @@ const Login = () => {
                   <input
                     type="password"
                     {...register("password", {
-                      required: "Passwor is Required",
+                      required: "Password is required",
                       minLength: {
                         value: 6,
-                        message: "Password Should be 6 Characters Or Longer",
+                        message: "Password Should be 6 Character or Longer",
                       },
                     })}
                     className="input input-bordered w-full"
@@ -52,7 +52,7 @@ const Login = () => {
                   <label className="label">
                     <span className="label-text-alt">Forgot Password?</span>
                   </label>
-                  {errors.password?.type === "required" && (
+                  {errors.password && (
                     <p className="text-red-600">{errors.password.message}</p>
                   )}
                 </div>
@@ -63,7 +63,9 @@ const Login = () => {
                 />
                 <p className="text-center mt-2">
                   New to Doctors Portal?{" "}
-                  <Link className="text-secondary">Create an Account</Link>{" "}
+                  <Link className="text-secondary" to="/signup">
+                    Create an Account
+                  </Link>{" "}
                 </p>
                 <div className="divider">OR</div>
                 <button className="btn btn-outline btn-accent btn-block">
